@@ -1,1 +1,29 @@
-
+#include "LiquidCrystal.h"          //Library of lcd
+LiquidCrystal lcd(9,8,7,6,5,4); //pin of lcd
+int val = 0 ;
+void setup()
+{
+    Serial.begin(9600);
+    lcd.begin(16,2); 
+    lcd.setCursor(0,0);
+    lcd.print("  PIR Sensor   ");
+    pinMode(12,INPUT);  // pir sensor output pin connected
+ 
+}
+void loop() 
+{
+  val = digitalRead(12);  //  pir sensor output pin connected
+  Serial.println(val);  // see the value in serial mpnitor in Arduino IDE
+  //delay(100);
+  
+  if(val == 1 )
+  {
+      lcd.setCursor(0,1);
+      lcd.print("    DETECTED      ");
+  }
+  else
+  {
+      lcd.setCursor(0,1);
+      lcd.print("  NOT DETECTED      ");
+  }
+  }
